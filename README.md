@@ -1,6 +1,6 @@
 ``` terminal
-composer install
-npm install
+composer i
+npm i
 php artisan key:gen
 php artisan serve
 ```
