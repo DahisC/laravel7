@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+// Route::get('/test', function () {
+//     $name = 'Dahis';
+//     return view('test', compact('name')); // compact 相當於建立一個變數名稱與值相同的物件
+//     // return view('test', ['name' => $name]);
+//     // return view('test')->with('name', 'Dahis'); // 上述兩種寫法等價！！
+// });
