@@ -1,72 +1,7 @@
 @extends('layouts.template')
 
 @section('css')
-<style>
-    :root {
-      --site-primary: #6366f1;
-      --site-secondary: #e0e7ff;
-      --site-btn-hover: ;
-    }
-    * {
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
-    }
-    nav {
-      height: 92px;
-    }
-    .logo {
-      height: 60px;
-    }
-    .color-input {
-      height: 20px;
-      width: 20px;
-    }
-    .feedback-form {
-      right: 0;
-      top: 0;
-    }
-    .google-map-wrapper {
-      height: 100vh;
-    }
-    .bg-site-primary {
-      background-color: var(--site-primary) !important;
-    }
-    .bg-site-secondary {
-      background-color: var(--site-secondary) !important;
-    }
-    .btn-site-primary {
-      background-color: var(--site-primary) !important;
-      color: white;
-    }
-    .btn-site-primary:hover {
-      background-color: #4f46e5 !important;
-      color: white;
-    }
-    .text-primary {
-      color: var(--site-primary) !important;
-    }
-    .site-hr {
-      border: 2px solid var(--site-primary);
-      background-color: var(--site-primary);
-      border-radius: 10px;
-      height: 0;
-      width: 75px;
-    }
-    .hot-selling .ranking > img,
-    .hot-selling .sharing > img {
-      width: 20px;
-      height: 20px;
-    }
-    .google-map-wrapper > .form-wrapper {
-      top: 0;
-      right: 0;
-    }
-    .google-map-wrapper > iframe {
-      filter: grayscale(100%) opacity(0.4) contrast(1.2);
-    }
-  </style>
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endsection
 
 @section('main')
@@ -148,7 +83,7 @@
               <div
                 class="bg-site-secondary d-inline-block rounded-circle p-4"
               >
-                <img src="imgs/svg_1.svg" alt="" />
+                <img src="{{ asset('imgs/svg_1.svg') }}" alt="" />
               </div>
             </div>
             <h5 class="mb-3">Shooting Stars</h5>
@@ -164,7 +99,7 @@
               <div
                 class="bg-site-secondary d-inline-block rounded-circle p-4"
               >
-                <img src="imgs/svg_2.svg" alt="" />
+                <img src="{{ asset('imgs/svg_2.svg') }}" alt="" />
               </div>
             </div>
             <h5 class="mb-3">The Catalyzer</h5>
@@ -180,7 +115,7 @@
               <div
                 class="bg-site-secondary d-inline-block rounded-circle p-4"
               >
-                <img src="imgs/svg_3.svg" alt="" />
+                <img src="{{ asset('imgs/svg_3.svg') }}" alt="" />
               </div>
             </div>
             <h5 class="mb-3">Neptune</h5>
@@ -451,7 +386,7 @@
                   <div
                     class="bg-site-secondary d-inline-block rounded-circle p-3 p-md-4 p-lg-5 mb-5 mb-md-0"
                   >
-                    <img src="imgs/svg_1_large.svg" alt="" />
+                    <img src="{{ asset('imgs/svg_1_large.svg') }}" alt="" />
                   </div>
                 </div>
               </div>
@@ -473,7 +408,7 @@
                   <div
                     class="bg-site-secondary d-inline-block rounded-circle p-3 p-md-4 p-lg-5 mb-5 mb-md-0"
                   >
-                    <img src="imgs/svg_2_large.svg" alt="" />
+                    <img src="{{ asset('imgs/svg_2_large.svg') }}" alt="" />
                   </div>
                 </div>
               </div>
@@ -495,7 +430,7 @@
                   <div
                     class="bg-site-secondary d-inline-block rounded-circle p-3 p-md-4 p-lg-5 mb-5 mb-md-0"
                   >
-                    <img src="imgs/svg_3_large.svg" alt="" />
+                    <img src="{{ asset('imgs/svg_3_large.svg') }}" alt="" />
                   </div>
                 </div>
               </div>
@@ -623,17 +558,17 @@
             <div class="row mb-3">
               <div class="col d-flex">
                 <div class="ranking mr-3">
-                  <img src="imgs/star.svg" alt="" />
-                  <img src="imgs/star.svg" alt="" />
-                  <img src="imgs/star.svg" alt="" />
-                  <img src="imgs/star.svg" alt="" />
-                  <img src="imgs/star_empty.svg" alt="" />
+                  <img src="{{ asset('imgs/star.svg') }}" alt="" />
+                  <img src="{{ asset('imgs/star.svg') }}" alt="" />
+                  <img src="{{ asset('imgs/star.svg') }}" alt="" />
+                  <img src="{{ asset('imgs/star.svg') }}" alt="" />
+                  <img src="{{ asset('imgs/star_empty.svg') }}" alt="" />
                 </div>
                 <div class="mr-3">4 Reviews</div>
                 <div class="sharing">
-                  <img src="imgs/Facebook.svg" alt="" />
-                  <img src="imgs/Twitter.svg" alt="" />
-                  <img src="imgs/Line.svg" alt="" />
+                  <img src="{{ asset('imgs/Facebook.svg') }}" alt="" />
+                  <img src="{{ asset('imgs/Twitter.svg') }}" alt="" />
+                  <img src="{{ asset('imgs/Line.svg') }}" alt="" />
                 </div>
               </div>
             </div>
@@ -648,8 +583,8 @@
                   banjo tattooed umami cardigan.
                 </p>
               </div>
-            </div>
-            <div class="row">
+                 </div>
+              <div class="row">
               <div class="col">
                 <div class="form-group d-flex align-items-center h-100">
                   <label class="mb-0 mr-3" for="size">Color</label>
@@ -689,7 +624,7 @@
                 <button
                   class="btn btn-secondary rounded-circle p-1 bg-light border-light"
                 >
-                  <img src="imgs/heart.svg" alt="" />
+                  <img src="{{ asset('imgs/heart.svg') }}" alt="" />
                 </button>
               </div>
             </div>

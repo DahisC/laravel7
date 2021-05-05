@@ -20,43 +20,49 @@
     @yield('css')
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home <span class="sr-only">(current)</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link disabled"
-              href="#"
-              tabindex="-1"
-              aria-disabled="true"
-              >Disabled</a
-            >
-          </li>
-        </ul>
-      </div>
+    <nav class="navbar navbar-expand-md navbar-light bg-light py-3 text-center text-md-right">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img class="logo" src="{{ asset('imgs/logo.svg') }}" alt="" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Portfolio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="h4 mb-0 fas fa-shopping-cart"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="h4 mb-0 fas fa-user-circle"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
     </nav>
     <main>
         @yield('main')
@@ -68,7 +74,7 @@
             class="d-flex d-lg-block flex-column justify-content-center col-12 col-md-4 mb-5 mb-md-0"
           >
             <h5>
-              <img class="inline-block" src="imgs/logo_2.svg" alt="" />
+              <img class="inline-block" src="{{ asset('imgs/logo_2.svg') }}" alt="" />
               數位方塊
             </h5>
             <p class="text-secondary">
@@ -114,9 +120,9 @@
           <span class="text-muted">© 2020 Tailblocks — </span>@knyttneve
         </p>
         <div>
-          <img src="imgs/Facebook.svg" alt="" />
-          <img src="imgs/Twitter.svg" alt="" />
-          <img src="imgs/Instagram.svg" alt="" />
+          <img src="{{ asset('imgs/Facebook.svg') }}" alt="" />
+          <img src="{{ asset('imgs/Twitter.svg') }}" alt="" />
+          <img src="{{ asset('imgs/Instagram.svg') }}" alt="" />
         </div>
       </div>
     </footer>

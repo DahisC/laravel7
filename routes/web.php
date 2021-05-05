@@ -13,8 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+Route::view('/', 'index');
+
+Route::view('/news', 'news/index');
+
+Route::get('/news/{id}', function ($id) {
+    // return 'news '.$id;
+    return view("news/content");
 });
 
 // Route::get('/test', function () {
