@@ -40,14 +40,15 @@ html {
     flex-direction: column;
     width: 90%;
     margin: 0 auto;
+    padding: 20px 0;
     .title {
         text-align: center;
         > .title__image {
-            width: 60px;
-            height: 60px;
+            height: 50px;
         }
         > .title__text {
-            margin-top: 0;
+            margin: 20px 0;
+            font-weight: bold;
         }
     }
     .page-info {
@@ -94,6 +95,9 @@ html {
                 background-color: #a44cc4;
                 padding: 5px 20px;
                 color: white;
+                @include media-lg() {
+                    margin-top: 10px;
+                }
             }
             > .news__title {
                 font-size: 1.5rem;

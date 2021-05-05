@@ -22,7 +22,7 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light py-3 text-center text-md-right">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/">
             <img class="logo" src="{{ asset('imgs/logo.svg') }}" alt="" />
           </a>
           <button
@@ -38,6 +38,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/news">News</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Blog</a>
               </li>

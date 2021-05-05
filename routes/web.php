@@ -19,12 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index');
 
-Route::view('/news', 'news/index');
+// Route::view('/news', 'news/index');
 
-Route::get('/news/{id}', function ($id) {
-    // return 'news '.$id;
-    return view("news/content");
-});
+Route::get('/news', 'NewsController@index');
+Route::view('/news/admin', 'news/admin');
+Route::post('/news/create', 'NewsController@create');
+Route::get('/news/update/{id}', 'NewsController@updateForm');
+Route::get('/news/delete/{id}/', 'NewsController@delete');
+
+Route::get('/news/{id}', 'NewsController@content');
 
 // Route::get('/test', function () {
 //     $name = 'Dahis';
