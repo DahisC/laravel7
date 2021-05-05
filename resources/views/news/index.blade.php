@@ -31,7 +31,7 @@
                 <span>1</span>
             </span>
             <span>
-                <a href="/news/admin">新增文章</a>
+                <a href="/news/create">新增文章</a>
             </span>
             <hr />
         </div>

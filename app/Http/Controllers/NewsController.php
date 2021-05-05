@@ -12,7 +12,10 @@ class NewsController extends Controller {
     }
     public function content($id) {
         $news = DB::table('news')->where('id', $id)->first();
-        return view('news/content', compact('news'));
+        return view('news/content', ['news' => $news]);
+    }
+    public function createForm() {
+        return view('news/admin');
     }
     public function create(Request $request) {
         DB::table('news')->insert([
@@ -24,21 +27,19 @@ class NewsController extends Controller {
         ]);
         return redirect('/news');
     }
-    public function createForm($id) {
-        return view('news/admin', compact('news'));
-    }
     public function updateForm($id) {
         $news = DB::table('news')->where('id', $id)->first();
         return view('news/admin', compact('news'));
     }
     public function update(Request $request) {
-        DB::table('news')->where('title', $request->input('title'))->update([
+        DB::table('news')->where('id', $request->input('id'))->update([
             'title' => $request->input('title'),
             'date' => $request->input('date'),
             'img' => $request->input('img'),
             'content' => $request->input('content'),
             'views' => $request->input('views'),
         ]);
+        return redirect('/news');
     }
     public function delete($id) {
         DB::table('news')->where('id', $id)->delete();
