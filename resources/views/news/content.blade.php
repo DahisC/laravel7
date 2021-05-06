@@ -35,3 +35,10 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    {{-- <script>
+        const { textContent } = document.querySelector('.news__content');
+        textContent = //.exec(textContent);
+    </script> --}}
+@endsection

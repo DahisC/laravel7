@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller {
     public function index() {
-        $newsList = DB::table('news')->get();
+        $newsList = News::get();
         return view('news/index', compact('newsList'));
     }
     public function content($id) {
-        $news = DB::table('news')->where('id', $id)->first();
+        $news = News::find($id);
         return view('news/content', ['news' => $news]);
     }
     public function createForm() {
         return view('news/admin');
     }
     public function create(Request $request) {
-        DB::table('news')->insert([
+        News::create([
             'title' => $request->input('title'),
             'date' => $request->input('date'),
             'img' => $request->input('img'),
@@ -28,21 +29,21 @@ class NewsController extends Controller {
         return redirect('/news');
     }
     public function updateForm($id) {
-        $news = DB::table('news')->where('id', $id)->first();
+        $news = News::find($id);
         return view('news/admin', compact('news'));
     }
     public function update(Request $request) {
-        DB::table('news')->where('id', $request->input('id'))->update([
+        // is destructing object available in php?
+        News::find($request->input('id'))->update([
             'title' => $request->input('title'),
             'date' => $request->input('date'),
             'img' => $request->input('img'),
             'content' => $request->input('content'),
-            'views' => $request->input('views'),
         ]);
         return redirect('/news');
     }
     public function delete($id) {
-        DB::table('news')->where('id', $id)->delete();
+        News::find($id)->delete();
         return redirect('/news');
     }
 }
