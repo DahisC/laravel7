@@ -19,13 +19,13 @@ class NewsController extends Controller {
         return view('news/admin');
     }
     public function create(Request $request) {
-        News::create([
-            'title' => $request->input('title'),
-            'date' => $request->input('date'),
-            'img' => $request->input('img'),
-            'content' => $request->input('content'),
-            'views' => $request->input('views'),
-        ]);
+        // News::create([
+        //     'title' => $request->input('title'),
+        //     'date' => $request->input('date'),
+        //     'img' => $request->input('img'),
+        //     'content' => $request->input('content'),
+        // ]);
+        News::create($request->all());
         return redirect('/news');
     }
     public function updateForm($id) {

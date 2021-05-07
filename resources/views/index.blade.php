@@ -645,7 +645,8 @@
           <div class="row justify-content-center justify-content-lg-end">
             <div class="col-12 col-md-6 col-xl-4">
               <div class="bg-white feedback-form px-4 py-5 rounded">
-                <form>
+                <form action="/contact/store" method="POST">
+                  @csrf
                   <h5>Feedback</h5>
                   <p>
                     Post-ironic portland shabby chic echo park, banjo fashion
@@ -657,6 +658,7 @@
                       type="email"
                       class="form-control"
                       id="form_email"
+                      name="email"
                     />
                   </div>
                   <div class="form-group">
@@ -665,6 +667,7 @@
                       class="form-control"
                       id="form_message"
                       rows="5"
+                      name="message"
                     ></textarea>
                   </div>
                   <button

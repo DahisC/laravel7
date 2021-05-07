@@ -19,10 +19,15 @@
                 <span>{{ $news->views }}</span>
             </span>
             <span>
-                <a href="/news/update/{{ $news->id }}">編輯</a>
+                <a href="/news/{{ $news->id }}/edit">編輯</a>
             </span>
             <span>
                 <a href="/news/delete/{{ $news->id }}">刪除</a>
+                {{-- <form id="delete_form" action="/news/{{ $news->id }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit">刪除</button>
+                </form> --}}
             </span>
             <hr />
         </div>

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\NewsResourceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,12 +37,19 @@ Route::view('/', 'index');
 //     Route::post('/update/{id}', 'NewsController@update');
 // });
 
-Route::group(['prefix' => 'news'],function () {
-    Route::get('/', 'NewsController@index');
-    Route::get('/delete/{id}/', 'NewsController@delete');
-    Route::get('/create', 'NewsController@createForm');
-    Route::get('/update/{id}', 'NewsController@updateForm');
-    Route::get('/{id}', 'NewsController@content'); // 此路由必須放在所有 get 請求之下
-    Route::post('/create', 'NewsController@create');
-    Route::post('/update/{id}', 'NewsController@update');
-});
+// Route::group(['prefix' => 'news'],function () {
+//     Route::get('/', 'NewsController@index');
+//     Route::get('/delete/{id}/', 'NewsController@delete');
+//     Route::get('/create', 'NewsController@createForm');
+//     Route::get('/update/{id}', 'NewsController@updateForm');
+//     Route::get('/{id}', 'NewsController@content'); // 此路由必須放在所有 get 請求之下
+//     Route::post('/create', 'NewsController@create');
+//     Route::post('/update/{id}', 'NewsController@update');
+// });
+
+Route::resource('/news', 'NewsResourceController');
+Route::get('/news/delete/{news}', 'NewsResourceController@delete');
+
+Route::post('/contact/store', 'ContactController@store');
+
+// Route::delete('news/{news}', 'NewsController@destroy');
