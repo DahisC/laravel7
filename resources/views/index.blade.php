@@ -645,7 +645,7 @@
           <div class="row justify-content-center justify-content-lg-end">
             <div class="col-12 col-md-6 col-xl-4">
               <div class="bg-white feedback-form px-4 py-5 rounded">
-                <form action="/contact/store" method="POST">
+                <form action="/contact/store" method="GET">
                   @csrf
                   <h5>Feedback</h5>
                   <p>

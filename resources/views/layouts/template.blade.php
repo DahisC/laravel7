@@ -59,7 +59,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/login">
                   <i class="h4 mb-0 fas fa-user-circle"></i>
                 </a>
               </li>
