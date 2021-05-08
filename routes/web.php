@@ -18,9 +18,11 @@ use App\Http\Controllers\NewsResourceController;
 */
 
 Route::view('/', 'index');
-Route::resource('/news', 'NewsResourceController')->middleware('auth');
-Route::get('/news/delete/{news}', 'NewsResourceController@delete');
-Route::get('/contact/store', 'ContactController@store');
+// Route::resource('/news', 'NewsResourceController')->middleware('auth');
+// Route::get('/news/delete/{news}', 'NewsResourceController@delete');
+// Route::get('/contact/store', 'ContactController@store');
+
+Route::resource('/admin/news', 'AdminNewsController')->middleware('auth');
 
 // Route::delete('news/{news}', 'NewsController@destroy');
 
