@@ -18,6 +18,7 @@
                 >瀏覽次數：
                 <span>{{ $news->views }}</span>
             </span>
+            @auth
             <span>
                 <a href="/news/{{ $news->id }}/edit">編輯</a>
             </span>
@@ -29,6 +30,7 @@
                     <button type="submit">刪除</button>
                 </form> --}}
             </span>
+            @endauth
             <hr />
         </div>
         <div class="news">

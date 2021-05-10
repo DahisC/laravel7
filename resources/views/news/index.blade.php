@@ -30,9 +30,11 @@
                 >目前頁次：
                 <span>1</span>
             </span>
+            @auth
             <span>
                 <a href="/news/create">新增文章</a>
             </span>
+            @endauth
             <hr />
         </div>
         @foreach ($newsList as $news)

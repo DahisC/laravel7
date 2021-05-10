@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin/sb-admin-2.min.css') }}">
     @yield('css')
 </head>
-<body>
+<body id="page-top">
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -64,7 +64,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Operation</h6>
-                        <a class="collapse-item" href="/admin/news">List</a>
+                        <a class="collapse-item" href="/news">Web Page</a>
+                        <a class="collapse-item" href="/admin/news">Manage</a>
                         <a class="collapse-item" href="/admin/news/create">Create</a>
                     </div>
                 </div>

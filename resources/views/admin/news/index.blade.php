@@ -19,7 +19,7 @@
     <h1 class="h3 mb-4 text-gray-800 text-center">News</h1>
     <hr />
     <div class="d-flex justify-content-end">
-        <a href="/admin/news/create" class="btn btn-primary btn-icon-split btn-sm mr-3 mb-3">
+        <a href="/admin/news/create" class="btn btn-primary btn-icon-split btn-md mb-3">
             <span class="icon text-white-50">
                 <i class="fas fa-flag"></i>
             </span>
@@ -41,18 +41,18 @@
         </a>
         <div class="collapse" id="news-{{ $news->id }}">
             <div class="card-body">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between flex-column flex-md-row">
                     <div>
                         Updated At: {{ $news->updated_at ?? 'Unknown' }}
                     </div>
-                    <div>
-                        <a href="/admin/news/{{ $news->id }}/edit" class="btn btn-warning btn-icon-split btn-sm mr-3">
+                    <div class="d-flex justify-content-end">
+                        <a href="/admin/news/{{ $news->id }}/edit" class="btn btn-warning btn-icon-split btn-md mr-3">
                             <span class="icon text-white-50">
                                 <i class="fas fa-flag"></i>
                             </span>
                             <span class="text">Edit</span>
                         </a>
-                        <button class="btn btn-danger btn-icon-split btn-sm"
+                        <button class="btn btn-danger btn-icon-split btn-md"
                                 onclick="
                                     document.querySelector('#delete-form{{ $news->id }}').submit();
                                 ">
@@ -69,7 +69,7 @@
                 </div>
                 <hr />
                 <div class="content">
-                    <img class="w-50 d-block mx-auto mb-5" src="{{ $news->img }}" />
+                    <img class="w-100 w-md-50 d-block mx-auto mb-5" src="{{ $news->img }}" />
                     {{ $news->content }}
                 </div>
             </div>

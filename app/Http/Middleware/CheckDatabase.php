@@ -13,7 +13,6 @@ class CheckDatabase {
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        dd('123123');
         return $next($request);
     }
 }
