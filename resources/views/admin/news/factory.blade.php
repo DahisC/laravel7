@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="h3 mb-4 text-gray-800 text-center">{{ $action }}</h1>
     <hr />
-    <form class="user" action="{{ $action == "Create" ? '/admin/news' : "/admin/news/$news->id" }}" method="POST">
+    <form class="user" action="{{ $action == "Create" ? route('admin.news.store') : route('admin.news.update', ['news' => $news->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method($action == "Create" ? "POST" : 'PUT')
         <div class="form-group">
@@ -16,8 +16,17 @@
         </div>
         <div class="form-group">
             <label for="image">Image</label>
-            <img class="d-block mx-auto my-3 w-50 rounded" src="{{ $news->img ?? 'https://i.ytimg.com/vi/UjLnvXpkq68/maxresdefault.jpg' }}">
-            <input id="image" type="text" class="form-control form-control-user" name="img" value="{{ $news->img ?? 'https://i.ytimg.com/vi/UjLnvXpkq68/maxresdefault.jpg' }}" required placeholder="Image">
+            <img id="preview_img" class="d-block mx-auto my-3 w-50 rounded" src="{{ $news->img ?? '' }}">
+            {{-- <input id="input_img" type="text" class="form-control form-control-user" name="img" value="{{ $news->img ?? 'https://i.ytimg.com/vi/UjLnvXpkq68/maxresdefault.jpg' }}" required placeholder="Image" oninput="img_preview.setAttribute('src', this.value);"> --}}
+            <div class="d-flex">
+                {{-- <input id="input_img" type="text" class="form-control form-control-user mr-3" name="img" value="{{ $news->img ?? 'https://i.ytimg.com/vi/UjLnvXpkq68/maxresdefault.jpg' }}" required placeholder="Image" oninput="preview_img.setAttribute('src', this.value);"> --}}
+                <button type="button" class="btn-block btn btn-primary btn-user px-5 d-flex align-items-center justify-content-center" onclick="input_upload_img.click();">
+                    <i class="fas fa-upload mr-2"></i>
+                    Upload
+                </button>
+                <input hidden id="input_upload_img" name="uploaded_img" type="file" accept="image/*"
+                    onchange="previewImage(this.files[0]);"/>
+            </div>
         </div>
         <div class="form-group">
             <label for="content">Content</label>
@@ -61,4 +70,16 @@
             </button>
         </div>
     </form>
+@endsection
+
+@section('js')
+    <script>
+        function previewImage(file) {
+            const r = new FileReader();
+            r.readAsDataURL(file);
+            r.onload = function() {
+                preview_img.setAttribute('src', this.result)
+            }
+        }
+    </script>
 @endsection

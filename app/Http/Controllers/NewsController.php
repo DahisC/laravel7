@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\DB;
 class NewsController extends Controller {
     public function index() {
         $newsList = News::get();
-        return view('news/index', compact('newsList'));
+        return view('news.index', compact('newsList'));
     }
     public function content($id) {
         $news = News::find($id);
-        return view('news/content', ['news' => $news]);
+        return view('news.content', ['news' => $news]);
     }
     public function createForm() {
-        return view('news/admin');
+        return view('news.admin');
     }
     public function create(Request $request) {
         // News::create([
@@ -30,7 +30,7 @@ class NewsController extends Controller {
     }
     public function updateForm($id) {
         $news = News::find($id);
-        return view('news/admin', compact('news'));
+        return view('news.admin', compact('news'));
     }
     public function update(Request $request) {
         // is destructing object available in php?

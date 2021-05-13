@@ -55,13 +55,13 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-news"
                     aria-expanded="true" aria-controls="collapseTwo">
                     {{-- <i class="fas fa-fw fa-cog"></i> --}}
                     <i class="far fa-newspaper"></i>
                     <span>News</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapse-news" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Operation</h6>
                         <a class="collapse-item" href="/news">Web Page</a>
@@ -69,6 +69,37 @@
                         <a class="collapse-item" href="/admin/news/create">Create</a>
                     </div>
                 </div>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-product"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    {{-- <i class="fas fa-fw fa-cog"></i> --}}
+                    <i class="far fa-newspaper"></i>
+                    <span>Product</span>
+                </a>
+                <div id="collapse-product" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Operation</h6>
+                        <a class="collapse-item" href="/news">頁面 Web Page</a>
+                        <a class="collapse-item" href="/admin/product">管理 Manage</a>
+                        <a class="collapse-item" href="/admin/product/create">新增 Create</a>
+                    </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">分類 Type</h6>
+                        <a class="collapse-item" href="/admin/product/type">管理 Manage</a>
+                        <a class="collapse-item" href="/admin/product/type/create">新增 Create</a>
+                    </div>
+                </div>
+                {{-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-product_type"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="far fa-newspaper"></i>
+                    <span>Product Type</span>
+                </a>
+                <div id="collapse-product_type" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Operation</h6>
+                        <a class="collapse-item" href="/admin/productType">Manage</a>
+                        <a class="collapse-item" href="/admin/productType/create">Create</a>
+                    </div>
+                </div> --}}
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -426,5 +457,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/admin/sb-admin-2.min.js') }}"></script>
+    @yield('js')
 </body>
 </html>

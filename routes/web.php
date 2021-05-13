@@ -19,13 +19,18 @@ use App\Http\Controllers\NewsResourceController;
 
 Route::view('/', 'index');
 Route::resource('/news', 'NewsResourceController');
-// Route::get('/news/delete/{news}', 'NewsResourceController@delete');
-// Route::get('/contact/store', 'ContactController@store');
 
-Route::resource('/admin/news', 'AdminNewsController')->middleware('auth');
-
-// Route::delete('news/{news}', 'NewsController@destroy');
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    // prefix 是網址前綴
+    // as 是路由名稱前綴
+    // names 是路由名稱
+    // parameters 是路由變數
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('/news', 'AdminNewsController');
+    Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+        Route::resource('/type', 'AdminProductTypeController');
+        Route::resource('/', 'AdminProductController')->parameters(['' => 'product']);
+    });
+});
 
 Auth::routes();
-
-Route::get('/admin', 'HomeController@index')->middleware('auth')->name('home');

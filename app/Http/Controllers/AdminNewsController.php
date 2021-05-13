@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AdminNewsController extends Controller
 {
@@ -16,8 +18,15 @@ class AdminNewsController extends Controller
         return view('admin.news.factory', compact('action'));
     }
     public function store(Request $request) {
-        News::create($request->all());
-        return redirect('/admin/news');
+        if ($request->hasFile('uploaded_img')) {
+            $path = $this->storeImage($request->file('uploaded_img'));
+            $req = $request->all();
+            $req['img'] = $path;
+            News::create($req);
+        } else {
+            News::create($request->all());
+        }
+        return redirect()->route('admin.news.index');
     }
     public function edit($id) {
         $action = 'Edit';
@@ -26,10 +35,17 @@ class AdminNewsController extends Controller
     }
     public function update(Request $request, $id) {
         $updateResult = News::find($id)->update($request->all());
-        if ($updateResult) return redirect("/admin/news");
+        if ($updateResult) return redirect()->route('admin.news.index');
     }
     public function destroy($id) {
-        $deleteResult = News::find($id)->delete();
-        if ($deleteResult) return redirect('/admin/news');
+        $targerProduct = News::find($id);
+        File::delete($targerProduct->img);
+        $deleteResult = $targerProduct->delete();
+        if ($deleteResult) return redirect()->route('admin.news.index');
+    }
+    public function storeImage($file) {
+        // Storage::put('/public/news/test.jpg', file_get_contents($file));
+        $path = Storage::putFile('/public/news', $file);
+        return Storage::url($path);
     }
 }
