@@ -119,7 +119,7 @@
                 const result = await fetch(url.replace(':id', imageId), {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json',
+                        // 'Content-Type': 'application/json',
                         "X-CSRF-Token": token
                     }
                 });
