@@ -16,7 +16,6 @@
         </div>
         <div class="form-group">
             <label for="image">Image</label>
-            <img id="preview_img" class="d-block mx-auto my-3 w-50 rounded" src="{{ $news->img ?? '' }}">
             {{-- <input id="input_img" type="text" class="form-control form-control-user" name="img" value="{{ $news->img ?? 'https://i.ytimg.com/vi/UjLnvXpkq68/maxresdefault.jpg' }}" required placeholder="Image" oninput="img_preview.setAttribute('src', this.value);"> --}}
             <div class="d-flex">
                 {{-- <input id="input_img" type="text" class="form-control form-control-user mr-3" name="img" value="{{ $news->img ?? 'https://i.ytimg.com/vi/UjLnvXpkq68/maxresdefault.jpg' }}" required placeholder="Image" oninput="preview_img.setAttribute('src', this.value);"> --}}
@@ -27,6 +26,7 @@
                 <input hidden id="input_upload_img" name="uploaded_img" type="file" accept="image/*"
                     onchange="previewImage(this.files[0]);"/>
             </div>
+            <img id="preview_img" class="d-block mx-auto my-3 w-50 rounded" src="{{ $news->img ?? '' }}">
         </div>
         <div class="form-group">
             <label for="content">Content</label>

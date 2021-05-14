@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
         Route::resource('/type', 'AdminProductTypeController');
         Route::resource('/', 'AdminProductController')->parameters(['' => 'product']);
+        Route::delete('/image/{image}', 'AdminProductController@deleteImage')->name('image.destroy');
     });
 });
 

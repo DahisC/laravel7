@@ -66,7 +66,10 @@
                 </div>
                 <hr />
                 <div class="content">
-                    <img class="w-75 d-block mx-auto mb-5" src="{{ $product->images[0] }}" />
+                    @foreach ($product->images as $image)
+                        <img class="w-75 d-block mx-auto mb-5" src="{{ asset($image->url) }}" />
+                    @endforeach
+                    {{-- <img class="w-75 d-block mx-auto mb-5" src="{{ $product->images[0] }}" /> --}}
                     {{ $product->description }}
                 </div>
             </div>

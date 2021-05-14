@@ -30,7 +30,7 @@
         <div class="row">
             @foreach ($productTypeList as $productType)
             <div class="col-12 col-sm-6 col-lg-4 mb-3">
-                <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card border-left-primary shadow h-100 py-2" onclick="location.replace('{{ route('admin.product.type.edit', ['type' => $productType->id]) }}')">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">

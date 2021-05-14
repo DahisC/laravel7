@@ -15,7 +15,7 @@
                 <label for="type_id">Type</label>
                 <select name="type_id" id="type_id" class="form-control form-control-user p-0" style="height: 50px; text-align-last: center;">
                     @foreach ($productTypeList as $productType)
-                    <option value="{{ $productType->id }}" @if ($product->type_id == $productType->id)
+                    <option value="{{ $productType->id }}" @if (isset($product) && $product->type_id == $productType->id)
                         selected
                     @endif>
                         {{ $productType->type }}
@@ -30,6 +30,16 @@
         </div>
         <div class="form-group">
             <label for="image">Images</label>
+            <div><small><i>已上傳的圖片</i></small></div>
+            <div id="uploaded_images_wrapper" class="d-flex flex-wrap">
+                @if (isset($product))
+                    @foreach ($product->images as $image)
+                        <img style="height: 200px; max-width: 100%;" class="d-block mx-auto my-3 rounded" src="{{ $image->url }}" data-id="{{ $image->id }}"/>
+                    @endforeach
+                @endif
+            </div>
+            <hr />
+            <div><small><i>未上傳的圖片</i></small></div>
             <div id="preview_images_wrapper" class="d-flex flex-wrap"></div>
             {{-- <img id="preview_img" style="height: 150px;" class="d-block mx-auto my-3 rounded" src="{{ $product->images ?? 'https://images-na.ssl-images-amazon.com/images/I/81FJqdi%2BJNL._AC_SL1500_.jpg' }}"> --}}
             {{-- <input id="input_img" type="text" class="form-control form-control-user" name="img" value="{{ $product->img ?? 'https://i.ytimg.com/vi/UjLnvXpkq68/maxresdefault.jpg' }}" required placeholder="Image" oninput="img_preview.setAttribute('src', this.value);"> --}}
@@ -39,7 +49,7 @@
                     <i class="fas fa-upload mr-2"></i>
                     Upload
                 </button>
-                <input hidden id="input_images" name="images" type="file" accept="image/*"
+                <input hidden id="input_images" name="images[]" type="file" accept="image/*"
                     onchange="previewImages(this.files);" multiple />
             </div>
             <div class="text-right">
@@ -75,6 +85,11 @@
 
 @section('js')
     <script>
+        uploaded_images_wrapper.addEventListener('click', e => {
+            const imageId = e.target.dataset.id;
+            deleteImage(imageId);
+        });
+
         async function previewImages(files) {
             uploaded_images_counter.textContent = files.length;
             preview_images_wrapper.innerHTML = '';
@@ -92,6 +107,32 @@
                     r.onload = function() {
                         resolve(this.result);
                     }
+                })
+            }
+        }
+
+        async function deleteImage(imageId) {
+            const token = '{{ csrf_token() }}';
+            const url = "{{ route('admin.product.image.destroy', ['image' => ':id']) }}";
+
+            if (confirm('刪除圖片？')) {
+                const result = await fetch(url.replace(':id', imageId), {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "X-CSRF-Token": token
+                    }
+                });
+                const images = await result.json();
+                renderImage(images);
+            }
+
+            function renderImage(images) {
+                uploaded_images_wrapper.innerHTML = '';
+                images.forEach(image => {
+                    uploaded_images_wrapper.innerHTML += `
+                        <img style="height: 200px; max-width: 100%;" class="d-block mx-auto my-3 rounded" src="${image.url}" data-id="${image.id}"}}">
+                    `
                 })
             }
         }
