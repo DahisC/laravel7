@@ -18,6 +18,14 @@
 @section('content')
     <h1 class="h3 mb-4 text-gray-800 text-center">Product</h1>
     <hr />
+    <a href="{{ route('admin.product.index') }}">
+        <span class="badge @if ($qs_type == 'all') badge-primary @else badge-secondary @endif">全部</span></a>
+    @foreach ($productTypeList as $productType)
+        <a href="{{ route('admin.product.index', ['type' => $productType->type]) }}">
+            <span class="badge @if ($qs_type == $productType->type) badge-primary @else badge-secondary @endif">{{ $productType->type }}</span>
+        </a>
+    @endforeach
+    <hr />
     <div class="d-flex justify-content-end">
         <a href="{{ route('admin.product.create') }}" class="btn btn-primary btn-icon-split btn-md mb-3">
             <span class="icon text-white-50">

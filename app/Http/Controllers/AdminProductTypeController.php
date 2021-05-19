@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
 
@@ -19,15 +20,15 @@ class AdminProductTypeController extends Controller
         ProductType::create($request->all());
         return redirect()->route('admin.product.type.index');
     }
-    // public function edit($id) {
-    //     $action = 'Edit';
-    //     $news = News::find($id);
-    //     return view('admin.news.factory', compact('action', 'news'));
-    // }
-    // public function update(Request $request, $id) {
-    //     $updateResult = News::find($id)->update($request->all());
-    //     if ($updateResult) return redirect()->route('admin.news.index');
-    // }
+    public function edit($id) {
+        $action = 'Edit';
+        $type = ProductType::find($id);
+        return view('admin.product.type.factory', compact('action', 'type'));
+    }
+    public function update(Request $request, $id) {
+        $updateResult = ProductType::find($id)->update($request->all());
+        if ($updateResult) return redirect()->route('admin.product.type.index');
+    }
     // public function destroy($id) {
     //     $targerProduct = News::find($id);
     //     File::delete($targerProduct->img);

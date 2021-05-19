@@ -28,19 +28,17 @@ class AdminNewsController extends Controller
         }
         return redirect()->route('admin.news.index');
     }
-    public function edit($id) {
+    public function edit(News $news) {
         $action = 'Edit';
-        $news = News::find($id);
         return view('admin.news.factory', compact('action', 'news'));
     }
-    public function update(Request $request, $id) {
-        $updateResult = News::find($id)->update($request->all());
+    public function update(Request $request, News $news) {
+        $updateResult = $news->update($request->all());
         if ($updateResult) return redirect()->route('admin.news.index');
     }
-    public function destroy($id) {
-        $targerProduct = News::find($id);
-        File::delete($targerProduct->img);
-        $deleteResult = $targerProduct->delete();
+    public function destroy(News $news) {
+        File::delete($news->img);
+        $deleteResult = $news->delete();
         if ($deleteResult) return redirect()->route('admin.news.index');
     }
     public function storeImage($file) {

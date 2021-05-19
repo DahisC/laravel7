@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="h3 mb-4 text-gray-800 text-center">{{ $action }}</h1>
     <hr />
-    <form class="user" action="{{ $action == "Create" ? route('admin.product.type.store') : route('admin.product.type.update', ['type' => $type->type]) }}" method="POST">
+    <form class="user" action="{{ $action == "Create" ? route('admin.product.type.store') : route('admin.product.type.update', ['type' => $type->id]) }}" method="POST">
         @csrf
         @method($action == "Create" ? "POST" : 'PUT')
         <div class="form-group">

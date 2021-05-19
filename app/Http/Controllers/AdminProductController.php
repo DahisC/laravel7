@@ -11,9 +11,22 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends Controller
 {
-    public function index() {
-        $productList = Product::with('type')->with('images')->get();
-        return view('admin.product.index', compact('productList'));
+    public function index(Request $request) {
+        // dd($request->query());
+        // $productList = Product::with('type')->with('images')->get();
+        $qs_type = $request->query()['type'] ?? 'all';
+        $productList = [];
+        $productTypeList = ProductType::get();
+
+        if ($qs_type != 'all') {
+            $productList = Product::with('type')->whereHas('type', function($q) use ($qs_type) {
+                $q->where('type', $qs_type);
+            })->get();
+        } else {
+            $productList = Product::get();
+        }
+        // dd(ProductType::with('product')->where('type', $request->query()['type'])->get());
+        return view('admin.product.index', compact('productList', 'productTypeList', 'qs_type'));
     }
     public function create() {
         $action = 'Create';
@@ -39,6 +52,7 @@ class AdminProductController extends Controller
     }
     public function destroy($id) {
         // $deleteResult = Product::find($id)->delete();
+        ProductImages::where('product_id', $id)->delete();
         $deleteResult = Product::destroy($id);
         if ($deleteResult) return redirect()->route('admin.product.index');
     }
