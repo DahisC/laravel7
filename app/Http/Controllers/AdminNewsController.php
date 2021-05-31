@@ -34,7 +34,7 @@ class AdminNewsController extends Controller
     }
     public function update(Request $request, News $news) {
         $updateResult = $news->update($request->all());
-        if ($updateResult) return redirect()->route('admin.news.index');
+        // if ($updateResult) return redirect()->route('admin.news.index');
     }
     public function destroy(News $news) {
         File::delete($news->img);

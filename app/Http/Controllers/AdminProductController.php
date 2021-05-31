@@ -6,26 +6,31 @@ use App\Product;
 use App\ProductType;
 use App\ProductImages;
 use Illuminate\Http\Request;
+use App\ProductsTypesConnect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class AdminProductController extends Controller
 {
     public function index(Request $request) {
         // dd($request->query());
         // $productList = Product::with('type')->with('images')->get();
-        $qs_type = $request->query()['type'] ?? 'all';
+        $qs_type = $request->type ?? 'all';
         $productList = [];
         $productTypeList = ProductType::get();
-
+        // DB::enableQueryLog();
         if ($qs_type != 'all') {
-            $productList = Product::with('type')->whereHas('type', function($q) use ($qs_type) {
-                $q->where('type', $qs_type);
+            $productList = Product::with('types')->whereHas('types', function($q) use ($qs_type) {
+                $q->where('type_id', $qs_type);
             })->get();
+            // $productList = Product::with('type')->whereHas('test', function($q) use ($qs_type) {
+            //     $q->where('id', $qs_type);
+            // })->get();
+            dd(DB::getQueryLog());
         } else {
-            $productList = Product::get();
+            $productList = Product::with('types')->get();
         }
-        // dd(ProductType::with('product')->where('type', $request->query()['type'])->get());
         return view('admin.product.index', compact('productList', 'productTypeList', 'qs_type'));
     }
     public function create() {
@@ -35,6 +40,12 @@ class AdminProductController extends Controller
     }
     public function store(Request $request) {
         $product = Product::create($request->all());
+        foreach ($request->input('type_id') as $type_id) {
+            ProductsTypesConnect::create([
+                'product_id' => $product->id,
+                'type_id' => $type_id
+            ]);
+        }
         $this->storeImages($request, $product->id);
         return redirect()->route('admin.product.index');
     }

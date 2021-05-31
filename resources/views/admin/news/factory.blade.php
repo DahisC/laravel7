@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="h3 mb-4 text-gray-800 text-center">{{ $action }}</h1>
     <hr />
-    <form class="user" action="{{ $action == "Create" ? route('admin.news.store') : route('admin.news.update', ['news' => $news->id]) }}" method="POST" enctype="multipart/form-data">
+    <form class="user" action="{{ $action == "Create" ? route('admin.news.store') : route('admin.news.update', ['news' => $news->id]) }}" method="GET" enctype="multipart/form-data">
         @csrf
         @method($action == "Create" ? "POST" : 'PUT')
         <div class="form-group">

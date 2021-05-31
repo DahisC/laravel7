@@ -3,30 +3,33 @@
 @section('content')
     <h1 class="h3 mb-4 text-gray-800 text-center">{{ $action }}</h1>
     <hr />
-    <form class="user" action="{{ $action == "Create" ? route('admin.product.store') : route('admin.product.update', ['product' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+    <form class="user"
+        action="{{ $action == 'Create' ? route('admin.product.store') : route('admin.product.update', ['product' => $product->id]) }}"
+        method="POST" enctype="multipart/form-data">
         @csrf
         @method($action == "Create" ? "POST" : 'PUT')
         <div class="d-flex">
             <div class="form-group mr-3 w-100">
                 <label for="name">Name</label>
-                <input id="name" type="text" class="form-control form-control-user" name="name" value="{{ $product->title ?? 'モクロー ぬいぐるみ' }}" required autofocus placeholder="Name">
+                <input id="name" type="text" class="form-control form-control-user" name="name"
+                    value="{{ $product->title ?? 'モクロー ぬいぐるみ' }}" required autofocus placeholder="Name">
             </div>
             <div class="form-group w-100">
                 <label for="type_id">Type</label>
-                <select name="type_id" id="type_id" class="form-control form-control-user p-0" style="height: 50px; text-align-last: center;">
+                <select name="type_id[]" multiple id="type_id" class="form-control form-control-user p-0"
+                    style="height: 50px; text-align-last: center;">
                     @foreach ($productTypeList as $productType)
-                    <option value="{{ $productType->id }}" @if (isset($product) && $product->type_id == $productType->id)
-                        selected
-                    @endif>
-                        {{ $productType->type }}
-                    </option>
+                        <option value="{{ $productType->id }}" @if (isset($product) && $product->type_id == $productType->id) selected @endif>
+                            {{ $productType->type }}
+                        </option>
                     @endforeach
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label for="date">Price</label>
-            <input id="price" type="number" class="form-control form-control-user" name="price" value="{{ $product->price ?? '2000' }}" required placeholder="$ Price">
+            <input id="price" type="number" class="form-control form-control-user" name="price"
+                value="{{ $product->price ?? '2000' }}" required placeholder="$ Price">
         </div>
         <div class="form-group">
             <label for="image">Images</label>
@@ -34,7 +37,8 @@
             <div id="uploaded_images_wrapper" class="d-flex flex-wrap">
                 @if (isset($product))
                     @foreach ($product->images as $image)
-                        <img style="height: 200px; max-width: 100%;" class="d-block mx-auto my-3 rounded" src="{{ $image->url }}" data-id="{{ $image->id }}"/>
+                        <img style="height: 200px; max-width: 100%;" class="d-block mx-auto my-3 rounded"
+                            src="{{ $image->url }}" data-id="{{ $image->id }}" />
                     @endforeach
                 @endif
             </div>
@@ -45,7 +49,9 @@
             {{-- <input id="input_img" type="text" class="form-control form-control-user" name="img" value="{{ $product->img ?? 'https://i.ytimg.com/vi/UjLnvXpkq68/maxresdefault.jpg' }}" required placeholder="Image" oninput="img_preview.setAttribute('src', this.value);"> --}}
             <div class="d-flex">
                 {{-- <input id="input_img" type="text" class="form-control form-control-user mr-3" name="img" value="{{ $product->img ?? 'https://images-na.ssl-images-amazon.com/images/I/81FJqdi%2BJNL._AC_SL1500_.jpg' }}" required placeholder="Image" oninput="preview_img.setAttribute('src', this.value);"> --}}
-                <button type="button" class="btn-block btn btn-primary btn-user px-5 d-flex align-items-center justify-content-center" onclick="input_images.click();">
+                <button type="button"
+                    class="btn-block btn btn-primary btn-user px-5 d-flex align-items-center justify-content-center"
+                    onclick="input_images.click();">
                     <i class="fas fa-upload mr-2"></i>
                     Upload
                 </button>
@@ -58,7 +64,8 @@
         </div>
         <div class="form-group">
             <label for="description">Content</label>
-            <textarea id="description" class="form-control" rows="10" name="description">{{ $product->description ?? '
+            <textarea id="description" class="form-control" rows="10" name="description">{{ $product->description ??
+    '
                 ポケモンセンターオリジナル商品に、モクローのぬいぐるみが登場!
 
                 ★ポケモンセンターオリジナルぬいぐるみの見どころ紹介！
@@ -70,8 +77,8 @@
                 自社開発のオリジナルグッズなので、安心してお手にとっていただけます。
                 ＜ポイント4＞こだわりのクオリティ
                 ポケモン1匹1匹の特徴に合わせて、細部まで忠実に再現！' }}
-            </textarea>
-          </div>
+                    </textarea>
+        </div>
         <div class="d-flex justify-content-end">
             <a href="/admin/product" class="btn btn-secondary btn-user px-5 mr-3">
                 Cancel
@@ -97,9 +104,10 @@
             const previewImages = await Promise.all(imagePromises);
             previewImages.forEach(image => {
                 preview_images_wrapper.innerHTML += `
-                    <img style="height: 200px; max-width: 100%;" class="d-block mx-auto my-3 rounded" src="${image}" }}">
-                `
+                            <img style="height: 200px; max-width: 100%;" class="d-block mx-auto my-3 rounded" src="${image}" }}">
+                        `
             });;
+
             function previewImage(file, cb) {
                 return new Promise((resolve) => {
                     const r = new FileReader();
@@ -110,6 +118,11 @@
                 })
             }
         }
+
+        fetch().then().then().catch()
+
+        fetch();
+        console.log(123);
 
         async function deleteImage(imageId) {
             const token = '{{ csrf_token() }}';
@@ -131,10 +144,11 @@
                 uploaded_images_wrapper.innerHTML = '';
                 images.forEach(image => {
                     uploaded_images_wrapper.innerHTML += `
-                        <img style="height: 200px; max-width: 100%;" class="d-block mx-auto my-3 rounded" src="${image.url}" data-id="${image.id}"}}">
-                    `
+                                <img style="height: 200px; max-width: 100%;" class="d-block mx-auto my-3 rounded" src="${image.url}" data-id="${image.id}"}}">
+                            `
                 })
             }
         }
+
     </script>
 @endsection
