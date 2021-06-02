@@ -20,6 +20,7 @@ class CreateProductTable extends Migration
             $table->integer('price');
             $table->longText('description');
             $table->longText('image');
+            $table->string('type');
         });
     }
 

@@ -1,7 +1,9 @@
 <?php
 
+use App\helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('/uploadImage', function (Request $request) {
+    if ($request->hasFile('uploaded_img')) {
+        $pathArray = helpers::uploadFile($request->file('uploaded_img'));
+        return response()->json([
+            'url' => $pathArray
+        ]);
+    } else {
+        return response('Failed', 400);
+    }
 });
