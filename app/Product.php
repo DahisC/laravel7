@@ -11,13 +11,16 @@ class Product extends Model
     // public function type() {
     //     return $this->hasOne(ProductType::class, 'id', 'type_id');
     // }
-    public function images() {
-        return $this->hasMany(ProductImages::class);
+    public function images()
+    {
+        return $this->hasMany(ProductImages::class, 'product_id', 'id');
     }
-    public function types() {
+    public function types()
+    {
         return $this->belongsToMany(ProductType::class, ProductsTypesConnect::class, 'product_id', 'type_id');
     }
-    public function test() {
+    public function test()
+    {
         return $this->hasMany(ProductsTypesConnect::class, 'product_id', 'id');
     }
 }

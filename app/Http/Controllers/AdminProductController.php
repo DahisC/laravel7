@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\helpers;
 use App\Product;
 use App\ProductType;
 use App\ProductImages;
@@ -13,7 +14,8 @@ use Illuminate\Support\Facades\DB;
 
 class AdminProductController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         // dd($request->query());
         // $productList = Product::with('type')->with('images')->get();
         $qs_type = $request->type ?? 'all';
@@ -21,21 +23,23 @@ class AdminProductController extends Controller
         $productTypeList = ProductType::get();
         // DB::enableQueryLog();
         if ($qs_type != 'all') {
-            $productList = Product::with('types')->whereHas('types', function($q) use ($qs_type) {
+            $productList = Product::with('types')->with('images')->whereHas('types', function ($q) use ($qs_type) {
                 $q->where('type_id', $qs_type);
             })->get();
             // $productList = Product::with('type')->whereHas('test', function($q) use ($qs_type) {
         } else {
-            $productList = Product::with('types')->get();
+            $productList = Product::with(['types', 'images'])->get();
         }
         return view('admin.product.index', compact('productList', 'productTypeList', 'qs_type'));
     }
-    public function create() {
+    public function create()
+    {
         $action = 'Create';
         $productTypeList = ProductType::get();
         return view('admin.product.factory', compact('action', 'productTypeList'));
     }
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $product = Product::create($request->all());
         foreach ($request->input('type_id') as $type_id) {
             ProductsTypesConnect::create([
@@ -43,28 +47,38 @@ class AdminProductController extends Controller
                 'type_id' => $type_id
             ]);
         }
-        $this->storeImages($request, $product->id);
+        $pathArray = helpers::uploadFile($request->file('images'), "/product/$product->id");
+        foreach ($pathArray as $path) {
+            ProductImages::create([
+                'product_id' => $product->id,
+                'url' => $path
+            ]);
+        }
         return redirect()->route('admin.product.index');
     }
-    public function edit($id) {
+    public function edit($id)
+    {
         $action = 'Edit';
         $product = Product::with('images')->find($id);
         $productTypeList = ProductType::get();
         return view('admin.product.factory', compact('action', 'product', 'productTypeList'));
     }
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $product = Product::find($id);
         $this->storeImages($request, $product->id);
         $updateResult = $product->update($request->all());
         if ($updateResult) return redirect()->route('admin.product.edit', ['product' => $id]);
     }
-    public function destroy($id) {
+    public function destroy($id)
+    {
         // $deleteResult = Product::find($id)->delete();
         ProductImages::where('product_id', $id)->delete();
         $deleteResult = Product::destroy($id);
         if ($deleteResult) return redirect()->route('admin.product.index');
     }
-    public function deleteImage($id) {
+    public function deleteImage($id)
+    {
         $productImage = ProductImages::find($id);
         $path = $productImage->url;
         $productId = $productImage->product_id;
@@ -76,7 +90,8 @@ class AdminProductController extends Controller
     //     // Storage::put('/public/product/test.jpg', file_get_contents($file));
     //     return Storage::putFile('/public/product', $file);
     // }
-    public function storeImages($request, $productId) {
+    public function storeImages($request, $productId)
+    {
         if (!empty($request->file('images'))) {
             $files = $request->file('images');
             // $product = Product::create($request->all());

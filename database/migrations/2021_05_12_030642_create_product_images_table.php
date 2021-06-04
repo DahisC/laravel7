@@ -17,7 +17,7 @@ class CreateProductImagesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('product_id');
-            $table->longText("image");
+            $table->longText("url");
         });
     }
 

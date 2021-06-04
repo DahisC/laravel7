@@ -22,12 +22,12 @@ class ProductsResourceController extends Controller
         $productTypeList = ProductType::get();
         // DB::enableQueryLog();
         if ($qs_type != 'all') {
-            $productList = Product::with('types')->whereHas('types', function ($q) use ($qs_type) {
+            $productList = Product::with(['types', 'images'])->whereHas('types', function ($q) use ($qs_type) {
                 $q->where('type_id', $qs_type);
             })->get();
             // $productList = Product::with('type')->whereHas('test', function($q) use ($qs_type) {
         } else {
-            $productList = Product::with('types')->get();
+            $productList = Product::with(['types', 'images'])->get();
         }
         return view('products.index', compact('productList', 'productTypeList', 'qs_type'));
     }
