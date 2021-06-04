@@ -25,9 +25,6 @@ class AdminProductController extends Controller
                 $q->where('type_id', $qs_type);
             })->get();
             // $productList = Product::with('type')->whereHas('test', function($q) use ($qs_type) {
-            //     $q->where('id', $qs_type);
-            // })->get();
-            dd(DB::getQueryLog());
         } else {
             $productList = Product::with('types')->get();
         }

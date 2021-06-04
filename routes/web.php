@@ -19,7 +19,9 @@ use Illuminate\Http\Request;
 */
 
 Route::view('/', 'index');
-Route::resource('/news', 'NewsResourceController');
+Route::view('/cart', 'cart.index');
+Route::resource('news', 'NewsResourceController');
+Route::resource('products', 'ProductsResourceController');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // prefix 是網址前綴
@@ -34,5 +36,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::delete('/image/{image}', 'AdminProductController@deleteImage')->name('image.destroy');
     });
 });
+
+Route::post('/contact/store', 'ContactController@store');
 
 Auth::routes();

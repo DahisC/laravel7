@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/uploadImage', function (Request $request) {
     if ($request->hasFile('uploaded_img')) {
-        $pathArray = helpers::uploadFile($request->file('uploaded_img'));
+        $pathArray = helpers::uploadFile($request->file('uploaded_img'), );
         return response()->json([
             'url' => $pathArray
         ]);
