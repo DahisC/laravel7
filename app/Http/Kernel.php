@@ -39,6 +39,12 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            // 讓 api 路由存取 session
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            // 讓 api 路由存取 session
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

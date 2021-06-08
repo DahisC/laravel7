@@ -123,34 +123,57 @@
             <hr />
             <h4 class="mb-5">訂單明細</h4>
             <!-- 商品 -->
-            <div class="d-flex align-items-center justify-content-between">
-              <img class="rounded-circle mr-3" src="https://i.imgur.com/EEguU02.jpg" />
-              <div class="mr-auto">
-                <h6>Chicken momo</h6>
-                <small class="text-muted">#41551</small>
-              </div>
-              <div class="input-group input-group-sm mr-3">
-                <div class="input-group-prepend">
-                  <button class="btn btn-outline-secondary" type="button">
-                    －
-                  </button>
+            <div class="row">
+              @foreach ($cartItems as $cartItem)
+                <div class="col-12 d-flex align-items-center text-center mb-3">
+                  <div class="col-2">
+                    <img src="{{ $cartItem->model->images[0]->url }}" />
+                  </div>
+                  <div class="col">
+                    <h6>{{ $cartItem->name }}</h6>
+                    <small class="text-muted">#{{ $cartItem->id }}</small>
+                  </div>
+                  <div class="col">
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="button">
+                          －
+                        </button>
+                      </div>
+                      <input type="text" class="form-control text-center mx-auto" value="{{ $cartItem->quantity }}" />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                          ＋
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1 text-right">
+                    <small>${{ $cartItem->price }}</small>
+                  </div>
                 </div>
-                <input type="text" class="form-control text-center" value="1" />
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button">
-                    ＋
-                  </button>
-                </div>
-              </div>
-              <small>$10.50</small>
+              @endforeach
             </div>
             <hr />
+            {{--  --}}
+            <div class="row text-right">
+              <div class="col-10">數量</div>
+              <div class="col-2">3</div>
+              <div class="col-10">小計</div>
+              <div class="col-2">$24.90</div>
+              <div class="col-10">運費</div>
+              <div class="col-2">$24.90</div>
+              <div class="col-10">總計</div>
+              <div class="col-2">$24.90</div>
+            </div>
+            {{--  --}}
+            <hr />
             <div class="d-flex justify-content-between">
-              <a href="#">
+              <a class="btn btn-link btn-site-primary" href="#">
                 <i class="fa fa-arrow-left mr-1"></i>
                 返回購物
               </a>
-              <button class="btn btn-primary px-5 py-2">下一步</button>
+              <button class="btn btn-site-primary px-5 py-2">下一步</button>
             </div>
           </form>
         </div>

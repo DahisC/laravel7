@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -228,6 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
     ],
 
 ];

@@ -22,11 +22,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/uploadImage', function (Request $request) {
     if ($request->hasFile('uploaded_img')) {
-        $pathArray = helpers::uploadFile($request->file('uploaded_img'), );
+        $pathArray = helpers::uploadFile($request->file('uploaded_img'),);
         return response()->json([
             'url' => $pathArray
         ]);
     } else {
         return response('Failed', 400);
     }
+});
+
+Route::group(['prefix' => 'cart'], function () {
+    Route::post('/add', 'CartController@add')->name('api.cart.add');
+    Route::delete('/clear', 'CartController@clear')->name('api.cart.clear');
 });

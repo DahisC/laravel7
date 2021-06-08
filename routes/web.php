@@ -39,4 +39,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 Route::post('/contact/store', 'ContactController@store');
 
+Route::group(['prefix' => 'cart'], function () {
+    Route::get('/', 'CartController@index')->name('cart.index');
+    // Route::get('/add/{product}', 'CartController@add')->name('cart.add');
+    // Route::get('/clear', 'CartController@clear')->name('cart.clear');
+});
+
 Auth::routes();
