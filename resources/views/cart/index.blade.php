@@ -125,7 +125,7 @@
             <!-- 商品 -->
             <div class="row">
               @foreach ($cartItems as $cartItem)
-                <div class="col-12 d-flex align-items-center text-center mb-3">
+                <div class="cart-item col-12 d-flex align-items-center text-center mb-3">
                   <div class="col-2">
                     <img src="{{ $cartItem->model->images[0]->url }}" />
                   </div>
@@ -135,13 +135,14 @@
                   </div>
                   <div class="col">
                     <div class="input-group input-group-sm">
-                      <div class="input-group-prepend">
+                      <div class="input-group-prepend" onclick="minus(this);">
                         <button class="btn btn-outline-secondary" type="button">
                           －
                         </button>
                       </div>
-                      <input type="text" class="form-control text-center mx-auto" value="{{ $cartItem->quantity }}" />
-                      <div class="input-group-append">
+                      <input type="text" class="form-control text-center mx-auto" value="{{ $cartItem->quantity }}"
+                        onchange="calculateItemTotal(this, {{ $cartItem->id }}, {{ $cartItem->price }})" />
+                      <div class="input-group-append" onclick="plus(this)">
                         <button class="btn btn-outline-secondary" type="button">
                           ＋
                         </button>
@@ -150,6 +151,7 @@
                   </div>
                   <div class="col-1 text-right">
                     <small>${{ $cartItem->price }}</small>
+                    <small id="_itemTotal_{{ $cartItem->id }}"></small>
                   </div>
                 </div>
               @endforeach
@@ -180,4 +182,23 @@
       </div>
     </div>
   </section>
+@endsection
+
+@section('js')
+  <script>
+    function minus(target) {
+      target.nextElementSibling.value--;
+      target.nextElementSibling.dispatchEvent(new Event('change'));
+    }
+
+    function plus(target) {
+      target.previousElementSibling.value++
+      target.previousElementSibling.dispatchEvent(new Event('change'));
+    }
+
+    function calculateItemTotal(target, id, itemPrice) {
+      document.querySelector(`#_itemTotal_${id}`).textContent = Number(target.value) * itemPrice
+    }
+
+  </script>
 @endsection

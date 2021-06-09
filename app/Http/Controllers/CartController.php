@@ -25,28 +25,25 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cartItems = \Cart::session(Session::getId())->getContent();
+        $cartItems = \Cart::getContent();
         return view('cart.index', compact('cartItems'));
     }
 
     public function add(Request $request)
     {
         $product = Product::find($request->productId);
-        \Cart::session(Session::getId())->add([
+        \Cart::add([
             'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
             'quantity' => 1,
-            'attributes' => [
-                'image' => $product->image
-            ],
-            // 'associatedModel' => 'Product'
+            'attributes' => array(),
         ])->associate('App\Product');
         return response('Item has been added to cart.', 200);
     }
     public function clear()
     {
-        \Cart::session(Session::getId())->clear();
+        \Cart::clear();
         return response('Cart cleared!', 200);
     }
     public function update()
