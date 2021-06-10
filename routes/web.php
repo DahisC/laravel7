@@ -19,7 +19,6 @@ use Illuminate\Http\Request;
 */
 
 Route::view('/', 'index');
-Route::view('/cart', 'cart.index');
 Route::resource('news', 'NewsResourceController');
 Route::resource('products', 'ProductsResourceController');
 
@@ -41,8 +40,10 @@ Route::post('/contact/store', 'ContactController@store');
 
 Route::group(['prefix' => 'cart'], function () {
     Route::get('/', 'CartController@index')->name('cart.index');
-    // Route::get('/add/{product}', 'CartController@add')->name('cart.add');
-    // Route::get('/clear', 'CartController@clear')->name('cart.clear');
+    Route::post('/check1', 'CartController@check1')->name('cart.check1');
+    Route::get('/step2', 'CartController@step2')->name('cart.step2');
+    Route::post('/check2', 'CartController@check2')->name('cart.check2');
+    Route::get('/step3', 'CartController@step3')->name('cart.step3');
 });
 
 Auth::routes();

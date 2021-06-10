@@ -26,7 +26,7 @@ class CartController extends Controller
     public function index()
     {
         $cartItems = \Cart::getContent();
-        return view('cart.index', compact('cartItems'));
+        return view('cart.step1', compact('cartItems'));
     }
 
     public function add(Request $request)
@@ -46,7 +46,32 @@ class CartController extends Controller
         \Cart::clear();
         return response('Cart cleared!', 200);
     }
-    public function update()
+    public function updateQuantity(Request $request)
     {
+        \Cart::update($request->productId, [
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->quantity
+            ),
+        ]);
+    }
+    public function delete($productId)
+    {
+        \Cart::remove($productId);
+        return response(compact('productId'));
+    }
+    public function step2()
+    {
+        return view('cart.step2');
+    }
+    public function check2(Request $request)
+    {
+        Session::put('payment_method', $request->payment_method);
+        Session::put('logistics_method', $request->logistics_method);
+        return redirect()->route('cart.step3');
+    }
+    public function step3()
+    {
+        return view('cart.step3');
     }
 }

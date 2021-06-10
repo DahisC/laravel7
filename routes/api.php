@@ -34,4 +34,6 @@ Route::post('/uploadImage', function (Request $request) {
 Route::group(['prefix' => 'cart'], function () {
     Route::post('/add', 'CartController@add')->name('api.cart.add');
     Route::delete('/clear', 'CartController@clear')->name('api.cart.clear');
+    Route::delete('/{productId}', 'CartController@delete')->name('api.cart.delete');
+    Route::patch('/updateQuantity', 'CartController@updateQuantity')->name('api.cart.updateQuantity');
 });
