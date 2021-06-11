@@ -12,6 +12,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        $this->call(NewsTableSeeder::class); // 呼叫 News 的 seeder
+        $this->call([
+            UsersTableSeeder::class,
+            // NewsTableSeeder::class,
+            ShippingStatusTable::class,
+            OrderStatusTable::class,
+        ]); // 呼叫 News 的 seeder
     }
 }

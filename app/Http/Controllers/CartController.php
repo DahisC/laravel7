@@ -7,6 +7,7 @@ use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use GuzzleHttp;
 
 
 
@@ -60,6 +61,10 @@ class CartController extends Controller
         \Cart::remove($productId);
         return response(compact('productId'));
     }
+    public function check1()
+    {
+        return view('cart.step2');
+    }
     public function step2()
     {
         return view('cart.step2');
@@ -73,5 +78,25 @@ class CartController extends Controller
     public function step3()
     {
         return view('cart.step3');
+    }
+    public function check3(Request $request)
+    {
+        // dd($request->all());
+
+        return view('cart.step3');
+    }
+    private function ecpay($order)
+    {
+        $client = new \GuzzleHttp\Client();
+        $options = [
+            'form_params' => [
+                'MerchantID' => '2000132',
+                'MerchantTradeNo' => '',
+                'MerchantTradeDate' => '',
+                'PaymentType' => 'aio',
+                'TotalAmount' => '123',
+            ]
+        ];
+        $request = $client->post('https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5', $options);
     }
 }

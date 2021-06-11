@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 window.Swal = require('sweetalert2');
+window.TwCitySelector = require('tw-city-selector');
 
 // window.Vue = require('vue');
 
