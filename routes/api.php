@@ -37,3 +37,7 @@ Route::group(['prefix' => 'cart'], function () {
     Route::delete('/{productId}', 'CartController@delete')->name('api.cart.delete');
     Route::patch('/updateQuantity', 'CartController@updateQuantity')->name('api.cart.updateQuantity');
 });
+
+Route::group(['prefix' => 'ecpay'], function () {
+    Route::post('/paid', 'ECPayController@paid');
+});

@@ -81,7 +81,7 @@
     <div class="container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-11 col-xl-10">
-                <form method="POST" action="{{ route('cart.check2') }}" class="order-form bg-light p-5 mx-auto rounded">
+                <form method="POST" action="{{ route('cart.check4') }}" class="order-form bg-light p-5 mx-auto rounded">
                     @csrf
                     <!-- 進度條 -->
                     <h3 class="font-weight-bold">購物車</h3>
@@ -100,16 +100,16 @@
                         </div>
                         <div class="px-1 col px-0 d-flex flex-column justify-content-center">
                             <div class="progress" style="height: 10px">
-                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+                                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25"
                                     aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                         <div class="col-1 px-0 d-flex justify-content-center py-4">
-                            <div class="order-progression-steps step-3">3</div>
+                            <div class="order-progression-steps step-3 done">3</div>
                         </div>
                         <div class="px-1 col px-0 d-flex flex-column justify-content-center">
                             <div class="progress" style="height: 10px">
-                                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="25"
+                                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25"
                                     aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
@@ -118,50 +118,9 @@
                         </div>
                     </div>
                     <hr />
-                    <!-- 付款方式 -->
-                    @php
-                    $payment_method = Session::get('payment_method');
-                    @endphp
-                    <h4 class="mb-5">付款方式</h4>
-                    <div class="px-3 h5">
-                        <div class="form-check pl-0 py-2">
-                            <input id="payment-method__credit-card" type="radio" name="payment_method"
-                                value="credit_card" required @if ($payment_method=='credit_card' ) checked @endif>
-                            <label class="mb-0" for="payment-method__credit-card">信用卡付款</label>
-                        </div>
-                        <hr />
-                        <div class="form-check pl-0 py-2">
-                            <input id="payment-method__atm" type="radio" name="payment_method" value="atm" required
-                            @if ($payment_method =='atm' ) checked @endif />
-                            <label class="mb-0" for="payment-method__atm">網路 ATM</label>
-                        </div>
-                        <hr />
-                        <div class="form-check pl-0 py-2">
-                            <input id="payment-method__cvs-code" type="radio" name="payment_method" value="cvs_code"
-                                required @if ($payment_method=='cvs_code' ) checked @endif />
-                            <label class="mb-0" for="payment-method__cvs-code">超商代碼</label>
-                        </div>
-                    </div>
+                    <!-- 寄送資料 -->
+                    <h4 class="mb-5">寄送資料</h4>
                     <hr />
-                    <!-- 運送方式 -->
-                    @php
-                    $shipping_method = Session::get('shipping_method');
-                    @endphp
-                    <h4 class="mb-5">運送方式</h4>
-                    <div class="px-3 h5">
-                        <div class="form-check pl-0 py-2">
-                            <input id="shipping-method__t-cat" type="radio" name="shipping_method" value="t_cat"
-                                required @if ($shipping_method=='t_cat' ) checked @endif />
-                            <label class="mb-0" for="shipping-method__t-cat">黑貓宅配</label>
-                        </div>
-                        <hr />
-                        <div class="form-check pl-0 py-2">
-                            <input id="shipping-method__cvs-to-cvs" type="radio" name="shipping_method"
-                                value="cvs_to_cvs" required @if ($shipping_method=='cvs_to_cvs' ) checked @endif />
-                            <label class="mb-0" for="shipping-method__cvs-to-cvs">
-                                超商店到店</label>
-                        </div>
-                    </div>
                     {{--  --}}
                     <div class="row text-right">
                         <div class="col-10">數量</div>
@@ -176,7 +135,7 @@
                     {{--  --}}
                     <hr />
                     <div class="d-flex justify-content-between">
-                        <a class="btn btn-site-primary px-5 py-2" href="{{ route('cart.index') }}">
+                        <a class="btn btn-site-primary px-5 py-2" href="{{ route('cart.step2') }}">
                             <i class="fa fa-arrow-left mr-1"></i>
                             返回購物
                         </a>
@@ -187,9 +146,32 @@
             </div>
         </div>
     </div>
+    @if (Session::get('ecpay'))
+    <div class="alert alert-success">
+        <form action="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5" method="POST"
+            onload="console.log('ec')">
+            @foreach (array_keys(Session::get('ecpay')) as $key)
+            <input type="text" name="{{ $key }}" value="{{ Session::get('ecpay')["$key"] }}">
+            @endforeach
+            <button type="submit">Ecpay</button>
+        </form>
+    </div>
+    @endif
 </section>
 
 <form id="go_step2" action="{{ route('cart.step2') }}" method="POST">
     @csrf
 </form>
+@endsection
+
+@section('js')
+<script>
+    // new TwCitySelector({
+    //     el: '#city-selector-set',
+    //     elCounty: '#county', // 在 el 裡查找 element
+    //     elDistrict: '#district', // 在 el 裡查找 element
+    //     elZipcode: '#zipcode' // 在 el 裡查找 element
+    // });
+
+</script>
 @endsection

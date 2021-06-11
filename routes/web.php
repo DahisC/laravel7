@@ -45,6 +45,8 @@ Route::group(['prefix' => 'cart'], function () {
     Route::post('/check2', 'CartController@check2')->name('cart.check2');
     Route::get('/step3', 'CartController@step3')->name('cart.step3');
     Route::post('/check3', 'CartController@check3')->name('cart.check3');
+    Route::get('/step4', 'CartController@step4')->name('cart.step4');
+    Route::post('/check4', 'CartController@check4')->name('cart.check4');
 });
 
 Auth::routes();

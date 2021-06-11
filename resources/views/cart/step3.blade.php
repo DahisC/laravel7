@@ -123,16 +123,18 @@
                     <div class="px-3 h5">
                         <div class="form-group">
                             <label for="name">姓名</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="王小明" />
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Dahis"
+                                value="Dahis" />
                         </div>
                         <div class="form-group">
                             <label for="phone">電話</label>
-                            <input type="text" name="phone" class="form-control" id="phone" placeholder="0912345678" />
+                            <input type="text" name="phone" class="form-control" id="phone" placeholder="0912345678"
+                                value="0912345678" />
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" name="email" class="form-control" id="email"
-                                placeholder="abc123@gmail.com" />
+                                placeholder="dahis@gmail.com" value="dahis@gmail.com" />
                         </div>
                         <div class="form-group">
                             <label for="address">地址</label>
@@ -148,7 +150,8 @@
                                         placeholder="郵遞區號" readonly hidden />
                                 </div>
                             </div>
-                            <input id="address" name="address" type="text" class="form-control" placeholder="地址" />
+                            <input id="address" name="address" type="text" class="form-control" placeholder="地址"
+                                value="85度C" />
                         </div>
                     </div>
                     <hr />
